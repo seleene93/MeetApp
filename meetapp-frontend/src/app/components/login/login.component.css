@@ -1,0 +1,17 @@
+#div-container-1 {
+  background-color: white;
+}
+
+h5 {
+  color: black;
+}
+
+button#login {
+  background-color: black;
+  border-color: black;
+}
+
+button#login:hover {
+  color: black;
+  background-color: white;
+}

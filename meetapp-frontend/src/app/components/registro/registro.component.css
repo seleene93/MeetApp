@@ -1,0 +1,23 @@
+.btn-login {
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+}
+
+#div-container-1 {
+  background-color: white;
+}
+
+h5 {
+  color: black;
+}
+
+button#registro {
+  background-color: black;
+  border-color: black;
+}
+
+button#registro:hover {
+  color: black;
+  background-color: rgb(255, 255, 255);
+}
