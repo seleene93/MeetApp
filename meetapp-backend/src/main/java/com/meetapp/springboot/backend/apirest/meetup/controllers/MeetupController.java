@@ -22,12 +22,12 @@ public class MeetupController {
 	@Autowired
 	private IMeetupService meetupService;
 	
-	@GetMapping("/meetups")
+	@GetMapping("/public/meetups")
 	public List<MeetupDto> getAll() {
 		return meetupService.getAll();
 	}
 	
-	@PostMapping("/meetups")
+	@PostMapping("/public/meetups")
 	public List<MeetupDto> getAllFilter(@RequestBody GetFilterMeetupsDto getFilterMeetups) {
 	    Long idTematica = getFilterMeetups.getIdTematica();
 	    Long idCiudad = getFilterMeetups.getIdCiudad();
@@ -46,8 +46,13 @@ public class MeetupController {
 	    return meetupService.getAll();
 	}
 	
-	@PostMapping("/meetups/meetup")
+	@PostMapping("/public/meetups/meetup")
 	public MeetupDto getMeetupById(@RequestBody GetFilterMeetupsDto getFilterMeetups) {
 		return meetupService.getMeetupById(getFilterMeetups.getIdMeetup());
+	}
+	
+	@PostMapping("/meetups/nuevo")
+	public MeetupDto insertMeetup(@RequestBody MeetupDto meetup) {
+		return meetupService.insertMeetup(meetup);
 	}
 }

@@ -12,6 +12,8 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MeetupComponent } from './components/meetup/meetup.component';
+import { LogoutComponent } from './logout/logout.component';
+import { ListadoAsistentesComponent } from './listado-asistentes/listado-asistentes.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { MeetupComponent } from './components/meetup/meetup.component';
     FooterComponent,
     NavbarComponent,
     MeetupComponent,
+    LogoutComponent,
+    ListadoAsistentesComponent,
   ],
   imports: [
     BrowserModule,

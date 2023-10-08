@@ -7,8 +7,13 @@ import java.util.List;
 import com.meetapp.springboot.backend.apirest.usuario.models.UsuarioDto;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name="meetups")
@@ -17,6 +22,7 @@ public class MeetupDto implements Serializable {
 	private static final long serialVersionUID = -8786188974782194720L;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idMeetup;
 	
 	private Long idUsuario;
@@ -31,6 +37,7 @@ public class MeetupDto implements Serializable {
 	
 	private String titulo;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date fecha;
 	
 	private String descripcion;
@@ -39,6 +46,7 @@ public class MeetupDto implements Serializable {
 	
 	private List<UsuarioDto> usuarios;
 	
+	@Transient
 	private Long numeroAsistentes;
 
 	public Long getIdMeetup() {

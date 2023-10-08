@@ -2,7 +2,9 @@ package com.meetapp.springboot.backend.apirest.meetup.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -21,13 +23,16 @@ public interface IMeetupMapper {
             "c.nombre AS nombreCiudad, " +
             "m.titulo AS titulo, " +
             "m.fecha AS fecha, " +
-            "m.descripcion AS descripcion, " +
-            "m.foto AS foto " +
+            "m.foto AS foto, " +
+            "u.avatar AS fotoUsuario " +
             "FROM meetapp.meetups m " +
             "LEFT JOIN meetapp.tematicas t " +
             "ON t.id_tematica = m.id_tematica " +
             "LEFT JOIN meetapp.ciudades c " +
             "ON c.id_ciudad = m.id_ciudad " +
+            "LEFT JOIN meetapp.usuarios u " +
+            "ON u.id_usuario = m.id_usuario " +
+            "WHERE m.fecha > now() " +
             "ORDER BY fecha ASC")
 	public List<MeetupDto> getAll();
 	
@@ -39,13 +44,17 @@ public interface IMeetupMapper {
             "m.titulo AS titulo, " +
             "m.fecha AS fecha, " +
             "m.descripcion AS descripcion, " +
-            "m.foto AS foto " +
+            "m.foto AS foto, " +
+            "u.avatar AS fotoUsuario " +
             "FROM meetapp.meetups m " +
             "LEFT JOIN meetapp.ciudades c " +
             "ON c.id_ciudad = m.id_ciudad " +
             "LEFT JOIN meetapp.tematicas t " +
             "ON t.id_tematica = m.id_tematica " +
+            "LEFT JOIN meetapp.usuarios u " +
+            "ON u.id_usuario = m.id_usuario " +
             "WHERE m.id_tematica = #{idTematica} AND m.id_ciudad = #{idCiudad} " +
+            "AND m.fecha > now() " +
             "ORDER BY fecha ASC")
 	public List<MeetupDto> getAllFilter(@Param("idTematica") Long idTematica, @Param("idCiudad") Long idCiudad);
 	
@@ -57,13 +66,17 @@ public interface IMeetupMapper {
             "m.titulo AS titulo, " +
             "m.fecha AS fecha, " +
             "m.descripcion AS descripcion, " +
-            "m.foto AS foto " +
+            "m.foto AS foto, " +
+            "u.avatar AS fotoUsuario " +
             "FROM meetapp.meetups m " +
             "LEFT JOIN meetapp.ciudades c " +
             "ON c.id_ciudad = m.id_ciudad " +
             "LEFT JOIN meetapp.tematicas t " +
             "ON t.id_tematica = m.id_tematica " +
+            "LEFT JOIN meetapp.usuarios u " +
+            "ON u.id_usuario = m.id_usuario " +
             "WHERE m.id_tematica = #{idTematica} " +
+            "AND m.fecha > now() " +
             "ORDER BY fecha ASC")
 	public List<MeetupDto> getAllFilterByIdTematica(@Param("idTematica") Long idTematica);
 	
@@ -75,13 +88,17 @@ public interface IMeetupMapper {
             "m.titulo AS titulo, " +
             "m.fecha AS fecha, " +
             "m.descripcion AS descripcion, " +
-            "m.foto AS foto " +
+            "m.foto AS foto, " +
+            "u.avatar AS fotoUsuario " +
             "FROM meetapp.meetups m " +
             "LEFT JOIN meetapp.ciudades c " +
             "ON c.id_ciudad = m.id_ciudad " +
             "LEFT JOIN meetapp.tematicas t " +
             "ON t.id_tematica = m.id_tematica " +
+            "LEFT JOIN meetapp.usuarios u " +
+            "ON u.id_usuario = m.id_usuario " +
             "WHERE m.id_ciudad = #{idCiudad} " +
+            "AND m.fecha > now() " +
             "ORDER BY fecha ASC")
 	public List<MeetupDto> getAllFilterByIdCiudad(@Param("idCiudad") Long idCiudad);
 
@@ -117,10 +134,22 @@ public interface IMeetupMapper {
 			"a.id_meetup = #{idMeetup}")
 	public List<Long> getIdsUsuariosAsistentes(@Param("idMeetup") Long idMeetup);
 	
-	@Select ("SELECT " +
+	@Select("SELECT " +
 			"u.nombre " +
 			"FROM meetapp.usuarios u " +
 			"WHERE " +
 			"id_usuario = #{idUsuario}")
 	public UsuarioDto getUsuarioAsistentes(@Param("idUsuario") Long idUsuario);
+	
+	@Insert("INSERT INTO meetups " +
+			"(id_meetup, id_usuario, " + 
+			"id_tematica, id_ciudad, " +
+			"titulo, fecha, " + 
+			"descripcion, foto) " +
+			"VALUES " +
+			"(#{idMeetup}, #{idUsuario}, #{idTematica}, " + 
+			"#{idCiudad}, #{titulo}, #{fecha}, " + 
+			"#{descripcion}, #{foto})")
+	@Options(useGeneratedKeys = true, keyProperty = "idMeetup")
+	void insertMeetup(MeetupDto meetup);
 }

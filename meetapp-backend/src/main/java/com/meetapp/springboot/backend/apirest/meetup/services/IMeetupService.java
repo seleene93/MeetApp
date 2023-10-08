@@ -15,4 +15,6 @@ public interface IMeetupService {
 	public List<MeetupDto> getAllFilterByIdCiudad(Long idCiudad);
 
 	public MeetupDto getMeetupById(Long idMeetup);
+
+	public MeetupDto insertMeetup(MeetupDto meetup);
 }

@@ -19,32 +19,66 @@ public class MeetupServiceImpl implements IMeetupService {
 
 	@Override
 	public List<MeetupDto> getAll() {
-		return (List<MeetupDto>) meetupMapper.getAll();
+		List<MeetupDto> meetups = meetupMapper.getAll();
+		
+		for (int i = 0; i < meetups.size(); i++) {
+			Long idMeetup = meetups.get(i).getIdMeetup();
+			Long numeroAsistentes = meetupMapper.getNumAsistentes(idMeetup);
+			meetups.get(i).setNumeroAsistentes(numeroAsistentes);
+		}
+		
+		return meetups;
 	}
 
 	@Override
 	public List<MeetupDto> getAllFilter(Long idTematica, Long idCiudad) {
-		return (List<MeetupDto>) meetupMapper.getAllFilter(idTematica, idCiudad);
+		List<MeetupDto> meetups = meetupMapper.getAllFilter(idTematica, idCiudad);
+		
+		for (int i = 0; i < meetups.size(); i++) {
+			Long idMeetup = meetups.get(i).getIdMeetup();
+			Long numeroAsistentes = meetupMapper.getNumAsistentes(idMeetup);
+			meetups.get(i).setNumeroAsistentes(numeroAsistentes);
+		}
+		
+		return meetups;
 	}
 
 	@Override
 	public List<MeetupDto> getAllFilterByIdTematica(Long idTematica) {
-		return (List<MeetupDto>) meetupMapper.getAllFilterByIdTematica(idTematica);
+		List<MeetupDto> meetups = meetupMapper.getAllFilterByIdTematica(idTematica);
+		
+		for (int i = 0; i < meetups.size(); i++) {
+			Long idMeetup = meetups.get(i).getIdMeetup();
+			Long numeroAsistentes = meetupMapper.getNumAsistentes(idMeetup);
+			meetups.get(i).setNumeroAsistentes(numeroAsistentes);
+		}
+		
+		return meetups;
 	}
 
 	@Override
 	public List<MeetupDto> getAllFilterByIdCiudad(Long idCiudad) {
-		return (List<MeetupDto>) meetupMapper.getAllFilterByIdCiudad(idCiudad);
+		List<MeetupDto> meetups = meetupMapper.getAllFilterByIdCiudad(idCiudad);
+		
+		for (int i = 0; i < meetups.size(); i++) {
+			Long idMeetup = meetups.get(i).getIdMeetup();
+			Long numeroAsistentes = meetupMapper.getNumAsistentes(idMeetup);
+			meetups.get(i).setNumeroAsistentes(numeroAsistentes);
+		}
+		
+		return meetups;
 	}
 
 	@Override
 	public MeetupDto getMeetupById(Long idMeetup) {
 		MeetupDto response = meetupMapper.getMeetupById(idMeetup);
 		Long numeroAsistentes = meetupMapper.getNumAsistentes(idMeetup);
-		response.setNumeroAsistentes(numeroAsistentes);
-		
 		List<UsuarioDto> usuariosAsistentes = getUsuariosAsistentes(idMeetup);
+		
+		if (response != null) {
+		response.setNumeroAsistentes(numeroAsistentes);
 		response.setUsuarios(usuariosAsistentes);
+		}
 		
 		return response;
 	}
@@ -60,5 +94,11 @@ public class MeetupServiceImpl implements IMeetupService {
 		}
 		
 		return usuariosAsistentes;
+	}
+
+	@Override
+	public MeetupDto insertMeetup(MeetupDto meetup) {
+		meetupMapper.insertMeetup(meetup);
+		return meetup;
 	}
 }

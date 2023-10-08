@@ -1,39 +1,52 @@
-<section id="container-meetup">
-  <div>
-    <div id="img-meetup" class="card text-dark card-has-bg click-col">
+<div class="container py-2">
+  <article class="postcard light purple">
+    <div class="postcard__img_link" href="#">
       <img
-        class="card-img d-none"
-        src="https://source.unsplash.com/600x900/?tech,street"
-        alt="Creative Manner Design Lorem Ipsum Sit Amet Consectetur dipisi?"
+        class="postcard__img"
+        src="https://picsum.photos/501/501"
+        alt="Image Title"
       />
-
-      <div class="card-body">
+    </div>
+    <div class="postcard__text t-dark">
+      <div class="card-header">
         <div>
-          <small class="card-meta mb-2">Ciudad</small>
-          <div>
-            <img
-              src="../../../assets/icons/people.png"
-              alt=""
-              style="height: 23px"
-            />24
+          <small class="card-meta mb-2" id="city">Ciudad</small>
+          <h1 class="postcard__title purple">
+            <p href="#" id="title">Título</p>
+          </h1>
+          <div
+            style="display: flex; flex-direction: column"
+            class="postcard__subtitle small"
+          >
+            <small><i class="fas fa-calendar-alt mr-2"></i> fecha y hora</small>
+            <small><i class="far fa-clock"></i>temática</small>
           </div>
         </div>
-        <h4 class="card-title mt-0">
-          <a class="text-dark">Título Meetup</a>
-        </h4>
-        <div>
-          <small><i class="far fa-clock"></i> fecha y hora</small>
-          <small><i class="far fa-clock"></i> temática</small>
-        </div>
+
+        <ul class="postcard__tagbox">
+          <li class="tag__item play purple">
+            <img src="./../../../assets/icons/people.png" alt="" width="20px" />
+            <a (click)="ModalListadoAsistentes()"
+              ><i class="fas fa-play mr-2"></i>24 asistentes</a
+            >
+          </li>
+        </ul>
       </div>
 
-      <img
-        class="mr-3 rounded-circle"
-        src="https://assets.codepen.io/460692/internal/avatars/users/default.png?format=auto&version=1688931977&width=80&height=80"
-        alt="Generic placeholder image"
-        style="max-width: 50px"
-      />
-      <h6 class="my-0 d-block" id="h6-t-meetup">Nombre usuario</h6>
+      <div class="postcard__preview-txt">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
+        fugiat asperiores inventore beatae accusamus odit minima enim, commodi
+        quia, doloribus eius! Ducimus nemo accusantium maiores velit corrupti
+        tempora reiciendis molestiae repellat vero. Eveniet ipsam adipisci illo
+        iusto quibusdam, sunt neque nulla unde ipsum dolores nobis enim quidem
+        excepturi, illum quos!
+      </div>
+      <button class="button-64" role="button">
+        <span class="text">¡Asisto!</span>
+      </button>
+      <!-- <button class="button-64" role="button">
+        <span class="text">No asisto</span>
+      </button> -->
     </div>
-  </div>
-</section>
+  </article>
+</div>

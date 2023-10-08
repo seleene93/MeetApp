@@ -4,34 +4,84 @@
       <a href="#" id="meetapp">MeetApp</a>
     </div>
   </nav>
-  <div class="navbar-expand-md">
-    <div class="navbar-dark text-center my-2">
-      <button
-        class="navbar-toggler w-75"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
+  <div id="container-nav-logout">
+    <div class="navbar-expand-md">
+      <div class="navbar-dark text-center my-2">
+        <button
+          class="navbar-toggler w-75"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+          <span class="align-middle"></span>
+        </button>
+      </div>
+      <div
+        class="text-center mt-3 collapse navbar-collapse"
+        id="navbarNavDropdown"
       >
-        <span class="navbar-toggler-icon"></span>
-        <span class="align-middle"></span>
-      </button>
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/meetups']">Meetups</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="ModalRegistro()">Regístrate</a>
+            <!-- <a class="nav-link">Mi perfil</a> -->
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="ModalLogin()">Iniciar sesión</a>
+            <!-- <a class="nav-link">Mis meetups</a> -->
+          </li>
+        </ul>
+      </div>
     </div>
-    <div
-      class="text-center mt-3 collapse navbar-collapse"
-      id="navbarNavDropdown"
-    >
-      <ul class="navbar-nav mx-auto">
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/meetups']">Meetups</a>
+    <div id="container-ul-logout">
+      <ul id="user-log">
+        <li>
+          <a (click)="ModalConfirmLogout()">
+            <svg
+              version="1.0"
+              xmlns="http://www.w3.org/2000/svg"
+              width="30px"
+              height="30px"
+              viewBox="0 0 512.000000 512.000000"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <g
+                transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                fill="#b7afbb"
+                stroke="none"
+              >
+                <path
+                  d="M740 4701 c-91 -28 -174 -104 -206 -187 -18 -48 -19 -104 -19 -1954
+            l0 -1905 21 -46 c31 -67 87 -124 152 -156 l57 -28 1285 0 1285 0 57 28 c65 32
+            121 89 152 156 21 46 21 53 21 708 l0 663 -26 25 c-56 56 -147 34 -168 -42 -7
+            -25 -11 -253 -11 -656 l0 -619 -29 -29 -29 -29 -1252 0 -1252 0 -29 29 -29 29
+            0 1876 0 1876 29 32 29 33 1251 0 1250 0 30 -29 31 -30 0 -628 c0 -676 0 -676
+            51 -712 40 -27 86 -21 125 18 l35 35 -3 658 -3 658 -23 50 c-29 63 -83 119
+            -147 153 l-50 27 -1280 2 c-704 1 -1291 -2 -1305 -6z"
+                />
+                <path
+                  d="M3864 3350 c-34 -14 -64 -59 -64 -98 0 -34 18 -54 277 -314 l278
+            -278 -919 0 -918 0 -29 -29 c-41 -41 -41 -101 0 -142 l29 -29 918 0 919 0
+            -278 -278 c-261 -262 -277 -280 -277 -314 0 -77 79 -127 145 -91 50 27 753
+            727 761 758 3 14 3 36 0 50 -8 30 -723 744 -764 762 -32 14 -49 15 -78 3z"
+                />
+              </g>
+            </svg>
+          </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" (click)="ModalRegistro()">Regístrate</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" (click)="ModalLogin()">Iniciar sesión</a>
+        <li>
+          <img
+            class="mr-3 rounded-circle"
+            src="https://assets.codepen.io/460692/internal/avatars/users/default.png?format=auto&version=1688931977&width=80&height=80"
+            alt="Generic placeholder image"
+            style="max-width: 30px"
+          />
         </li>
       </ul>
     </div>

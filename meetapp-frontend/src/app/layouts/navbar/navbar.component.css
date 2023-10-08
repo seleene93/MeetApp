@@ -7,16 +7,27 @@
   text-decoration: none;
 }
 
+div.navbar-expand-md {
+  margin-left: 7%;
+  justify-content: center;
+  width: 100%;
+}
+
 .nav-item a {
+  margin-right: 1rem;
+  margin-left: 1rem;
   color: #b7afbb;
 }
+
 .nav-item a:hover {
   cursor: pointer;
   color: #ffffff;
 }
+
 .nav-item {
   min-width: 12vw;
 }
+
 #mainNavigation {
   position: fixed;
   top: 0;
@@ -37,12 +48,51 @@
   );
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 );
 }
+
 #navbarNavDropdown.collapsing .navbar-nav,
 #navbarNavDropdown.show .navbar-nav {
+  width: 15rem !important;
   background: #9716d341;
   padding: 12px;
 }
 
 #meetapp {
   color: white;
+}
+
+ul#user-log {
+  margin: 0;
+  list-style: none;
+  display: flex !important;
+  justify-content: flex-start;
+  align-items: center;
+}
+ul#user-log li {
+  margin: 0.5rem;
+}
+
+ul#user-log li svg {
+  filter: drop-shadow(1px 1px 2px rgb(212, 168, 218));
+}
+
+ul#user-log li svg:hover {
+  cursor: pointer;
+  filter: drop-shadow(1px 1px 2px rgb(255, 255, 255));
+}
+
+#container-nav-logout {
+  display: flex;
+}
+
+#container-ul-logout {
+  width: 10rem;
+  display: flex;
+}
+
+.navbar-toggler {
+  width: 15rem !important;
+}
+
+.navbar-toggler-icon {
+  width: 1.6rem;
 }
