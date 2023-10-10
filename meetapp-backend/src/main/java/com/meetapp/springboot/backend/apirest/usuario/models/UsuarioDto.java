@@ -1,26 +1,22 @@
 package com.meetapp.springboot.backend.apirest.usuario.models;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import com.meetapp.springboot.backend.apirest.usuario.Role;
+import com.meetapp.springboot.backend.apirest.auth.models.ErrorDto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @Table(name="usuarios", uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
-public class UsuarioDto implements Serializable, UserDetails{
+public class UsuarioDto extends ErrorDto implements Serializable {
 
 	private static final long serialVersionUID = -3228420481940170315L;
 	
@@ -36,10 +32,15 @@ public class UsuarioDto implements Serializable, UserDetails{
 	private String password;
 	
 	private String biografia;
+
+	@Lob
+	@Column(name = "avatar_base64", columnDefinition = "BLOB")
+	private String avatarBase64;
 	
-	private String avatar;
+	private String avatarFileName;
 	
-	private Role rol;
+	@Transient
+	private String token;
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -81,57 +82,32 @@ public class UsuarioDto implements Serializable, UserDetails{
 		this.biografia = biografia;
 	}
 
-	public String getAvatar() {
-		return avatar;
+	public String getAvatarBase64() {
+		return avatarBase64;
 	}
 
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
+	public void setAvatarBase64(String avatarBase64) {
+		this.avatarBase64 = avatarBase64;
 	}
 
-	public Role getRol() {
-		return rol;
+	public String getAvatarFileName() {
+		return avatarFileName;
 	}
 
-	public void setRol(Role rol) {
-		this.rol = rol;
+	public void setAvatarFileName(String avatarFileName) {
+		this.avatarFileName = avatarFileName;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 	
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return List.of(new SimpleGrantedAuthority((rol.name())));
-	}
-
-	@Override
-	public String getUsername() {
-		return email;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return true;
-	}
-
-	
-	
-
 }

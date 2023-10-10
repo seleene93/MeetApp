@@ -23,8 +23,8 @@ public interface IMeetupMapper {
             "c.nombre AS nombreCiudad, " +
             "m.titulo AS titulo, " +
             "m.fecha AS fecha, " +
-            "m.foto AS foto, " +
-            "u.avatar AS fotoUsuario " +
+            "m.img_file_name AS imgFileName, " +
+            "m.img_base64 AS imgBase64 " +
             "FROM meetapp.meetups m " +
             "LEFT JOIN meetapp.tematicas t " +
             "ON t.id_tematica = m.id_tematica " +
@@ -39,13 +39,14 @@ public interface IMeetupMapper {
 	@Select("SELECT " +
             "m.id_meetup AS idMeetup, " +
             "m.id_usuario AS idUsuario, " +
+            "t.id_tematica AS idTematica, " +
             "t.tipo AS tipoTematica, " +
+            "c.id_ciudad AS idCiudad, " +
             "c.nombre AS nombreCiudad, " +
             "m.titulo AS titulo, " +
             "m.fecha AS fecha, " +
-            "m.descripcion AS descripcion, " +
-            "m.foto AS foto, " +
-            "u.avatar AS fotoUsuario " +
+            "m.img_file_name AS imgFileName, " +
+            "m.img_base64 AS imgBase64 " +
             "FROM meetapp.meetups m " +
             "LEFT JOIN meetapp.ciudades c " +
             "ON c.id_ciudad = m.id_ciudad " +
@@ -61,13 +62,14 @@ public interface IMeetupMapper {
 	@Select("SELECT " +
             "m.id_meetup AS idMeetup, " +
             "m.id_usuario AS idUsuario, " +
+            "t.id_tematica AS idTematica, " +
             "t.tipo AS tipoTematica, " +
+            "c.id_ciudad AS idCiudad, " +
             "c.nombre AS nombreCiudad, " +
             "m.titulo AS titulo, " +
             "m.fecha AS fecha, " +
-            "m.descripcion AS descripcion, " +
-            "m.foto AS foto, " +
-            "u.avatar AS fotoUsuario " +
+            "m.img_file_name AS imgFileName, " +
+            "m.img_base64 AS imgBase64 " +
             "FROM meetapp.meetups m " +
             "LEFT JOIN meetapp.ciudades c " +
             "ON c.id_ciudad = m.id_ciudad " +
@@ -83,13 +85,14 @@ public interface IMeetupMapper {
 	@Select("SELECT " +
             "m.id_meetup AS idMeetup, " +
             "m.id_usuario AS idUsuario, " +
+            "t.id_tematica AS idTematica, " +
             "t.tipo AS tipoTematica, " +
+            "c.id_ciudad AS idCiudad, " +
             "c.nombre AS nombreCiudad, " +
             "m.titulo AS titulo, " +
             "m.fecha AS fecha, " +
-            "m.descripcion AS descripcion, " +
-            "m.foto AS foto, " +
-            "u.avatar AS fotoUsuario " +
+            "m.img_file_name AS imgFileName, " +
+            "m.img_base64 AS imgBase64 " +
             "FROM meetapp.meetups m " +
             "LEFT JOIN meetapp.ciudades c " +
             "ON c.id_ciudad = m.id_ciudad " +
@@ -110,7 +113,8 @@ public interface IMeetupMapper {
             "m.titulo AS titulo, " +
             "m.fecha AS fecha, " +
             "m.descripcion AS descripcion, " +
-            "m.foto AS foto " +
+            "m.img_file_name AS imgFileName, " +
+            "m.img_base64 AS imgBase64 " +
             "FROM meetapp.meetups m " +
             "LEFT JOIN meetapp.ciudades c " +
             "ON c.id_ciudad = m.id_ciudad " +
@@ -145,11 +149,11 @@ public interface IMeetupMapper {
 			"(id_meetup, id_usuario, " + 
 			"id_tematica, id_ciudad, " +
 			"titulo, fecha, " + 
-			"descripcion, foto) " +
+			"descripcion, img_file_name, img_base64) " +
 			"VALUES " +
 			"(#{idMeetup}, #{idUsuario}, #{idTematica}, " + 
 			"#{idCiudad}, #{titulo}, #{fecha}, " + 
-			"#{descripcion}, #{foto})")
+			"#{descripcion}, #{imgFileName}, #{imgBase64})")
 	@Options(useGeneratedKeys = true, keyProperty = "idMeetup")
 	void insertMeetup(MeetupDto meetup);
 }

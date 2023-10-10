@@ -1,5 +1,7 @@
 package com.meetapp.springboot.backend.apirest.usuario.controllers;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -8,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.meetapp.springboot.backend.apirest.auth.models.AuthResponse;
 import com.meetapp.springboot.backend.apirest.usuario.models.UsuarioDto;
 import com.meetapp.springboot.backend.apirest.usuario.services.IUsuarioService;
 
@@ -24,12 +25,12 @@ public class UsuarioController {
 	private IUsuarioService usuarioService;
 
 	@PostMapping("/public/registro")
-	public ResponseEntity<AuthResponse> register(@RequestBody UsuarioDto usuario) {
+	public ResponseEntity<UsuarioDto> register(@RequestBody UsuarioDto usuario) throws IOException {
 		return ResponseEntity.ok(usuarioService.register(usuario));
 	}
 	
 	@PostMapping("/public/login")
-	public ResponseEntity<AuthResponse> login(@RequestBody UsuarioDto usuario) {
+	public ResponseEntity<UsuarioDto> login(@RequestBody UsuarioDto usuario) {
 		return ResponseEntity.ok(usuarioService.login(usuario));
 	}
 }

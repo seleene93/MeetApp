@@ -18,12 +18,12 @@ public class AsistenteController {
 	@Autowired
 	private IAsistenteService asistenteService;
 	
-	@PostMapping("/crear-asistencia")
+	@PostMapping("/private/crear-asistencia")
 	public AsistenteDto addAsistente(@RequestBody AsistenteDto asistente) {
 		return asistenteService.addAsistente(asistente);
 	}
 	
-	@PostMapping("/eliminar-asistencia")
+	@PostMapping("/private/eliminar-asistencia")
 	public AsistenteDto deleteAsistente(@RequestBody AsistenteDto asistente) {
 		return asistenteService.deleteAsistente(asistente);
 	}

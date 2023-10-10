@@ -1,5 +1,6 @@
 package com.meetapp.springboot.backend.apirest.meetup.services;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.meetapp.springboot.backend.apirest.meetup.models.MeetupDto;
@@ -16,5 +17,5 @@ public interface IMeetupService {
 
 	public MeetupDto getMeetupById(Long idMeetup);
 
-	public MeetupDto insertMeetup(MeetupDto meetup);
+	public MeetupDto insertMeetup(MeetupDto meetup) throws IOException;
 }

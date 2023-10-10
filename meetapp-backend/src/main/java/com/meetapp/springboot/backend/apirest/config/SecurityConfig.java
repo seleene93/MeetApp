@@ -1,9 +1,7 @@
 package com.meetapp.springboot.backend.apirest.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -12,21 +10,16 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.meetapp.springboot.backend.apirest.jwt.JwtAuthenticationFilter;
 
-
-import lombok.RequiredArgsConstructor;
-
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
 public class SecurityConfig {
 	
+	
 	private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    private final AuthenticationProvider authProvider;
     
-    @Autowired
-    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter, AuthenticationProvider authProvider) {
+    
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
-        this.authProvider = authProvider;
     }
 
 	
@@ -37,11 +30,11 @@ public class SecurityConfig {
 			.authorizeHttpRequests(authRequest -> 
 				authRequest
 					.requestMatchers("/api/public/**").permitAll()
+					.requestMatchers("/api/private/**").authenticated()
 					.anyRequest().authenticated())
 			.sessionManagement(sessionManager ->
 					sessionManager
 						.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-			.authenticationProvider(authProvider)
 			.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
 			.build();
 	}

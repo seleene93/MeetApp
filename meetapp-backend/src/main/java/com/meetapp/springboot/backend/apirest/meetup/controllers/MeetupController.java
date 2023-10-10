@@ -1,5 +1,6 @@
 package com.meetapp.springboot.backend.apirest.meetup.controllers;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +52,8 @@ public class MeetupController {
 		return meetupService.getMeetupById(getFilterMeetups.getIdMeetup());
 	}
 	
-	@PostMapping("/meetups/nuevo")
-	public MeetupDto insertMeetup(@RequestBody MeetupDto meetup) {
+	@PostMapping("/private/meetups/nuevo")
+	public MeetupDto insertMeetup(@RequestBody MeetupDto meetup) throws IOException {
 		return meetupService.insertMeetup(meetup);
 	}
 }
