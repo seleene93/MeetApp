@@ -1,0 +1,29 @@
+.btn-login {
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+}
+
+#div-container-1 {
+  background-color: white;
+}
+
+h5 {
+  color: black;
+}
+
+button#nuevoMeetup {
+  background-color: black;
+  border-color: black;
+}
+
+button#nuevoMeetup:hover {
+  color: black;
+  background-color: rgb(255, 255, 255);
+}
+
+#form-filtros {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}

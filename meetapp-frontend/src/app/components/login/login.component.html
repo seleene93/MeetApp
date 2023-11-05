@@ -1,12 +1,14 @@
 <div class="card-body p-4 p-sm-5" id="div-container-1">
   <h5 class="card-title text-center mb-5 fs-5">Inicia sesión</h5>
-  <form>
+  <form (ngSubmit)="login()">
     <div class="form-floating mb-3">
       <input
         type="email"
         class="form-control"
         id="floatingInputEmail"
         placeholder="name@example.com"
+        [(ngModel)]="usuario.email"
+        name="email"
       />
       <label for="floatingInputEmail">Email</label>
     </div>
@@ -17,6 +19,8 @@
         class="form-control"
         id="floatingPassword"
         placeholder="Password"
+        [(ngModel)]="usuario.password"
+        name="password"
       />
       <label for="floatingPassword">Contraseña</label>
     </div>

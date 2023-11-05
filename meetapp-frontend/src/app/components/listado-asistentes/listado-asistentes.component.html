@@ -1,0 +1,10 @@
+<section class="overflow-x">
+  <div class="horizontal-friends-list">
+    <figure *ngFor="let asistente of asistentes">
+      <picture>
+        <img [src]="asistente.avatarBase64" />
+      </picture>
+      <figcaption>{{ asistente.nombre }}</figcaption>
+    </figure>
+  </div>
+</section>

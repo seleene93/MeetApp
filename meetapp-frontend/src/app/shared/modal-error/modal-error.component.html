@@ -1,0 +1,32 @@
+<div class="modal-error">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Error</h3>
+      <button (click)="closeModal()">Cerrar</button>
+    </div>
+    <div class="modal-body">
+      <div [ngSwitch]="errorType">
+        <div *ngSwitchCase="'notFound'">
+          <p>{{ constantes.notFoundError }}</p>
+        </div>
+        <div *ngSwitchCase="'unauthorized'">
+          <p>{{ constantes.unauthorizedError }}</p>
+        </div>
+        <div *ngSwitchCase="'registerError'">
+          <p>
+            {{ constantes.registerError }}
+          </p>
+        </div>
+        <div *ngSwitchCase="'noValidImgFile'">
+          <p>{{ constantes.noValidImgFileError }}</p>
+        </div>
+        <div *ngSwitchCase="'loginError'">
+          <p>{{ constantes.loginError }}</p>
+        </div>
+        <div *ngSwitchDefault>
+          <p>{{ constantes.genericError }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

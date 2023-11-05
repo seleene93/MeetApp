@@ -7,6 +7,4 @@ public interface IAsistenteService {
 	AsistenteDto addAsistente(AsistenteDto asistente);
 
 	AsistenteDto deleteAsistente(AsistenteDto asistente);
-	
-	
 }

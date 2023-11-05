@@ -1,0 +1,93 @@
+/* Fondo oscuro detrás del modal */
+.modal-error {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Contenedor principal del modal */
+.modal-content {
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.5);
+  max-width: 400px;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Cabecera del modal */
+.modal-header {
+  border-bottom: 1px solid #ced4da;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+}
+
+.modal-header h3 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+/* Botón para cerrar el modal */
+.modal-header button {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 1rem;
+  float: right;
+}
+
+.modal-header button:hover {
+  text-decoration: underline;
+}
+
+/* Cuerpo del modal */
+.modal-body p {
+  margin: 0;
+}
+
+/* Estilos específicos para los mensajes de error */
+.modal-body p:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+/* Estilos para los diferentes tipos de mensaje de error */
+.modal-body .alert {
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  font-weight: bold;
+}
+
+.modal-body .alert.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.modal-body .alert.alert-warning {
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+
+.modal-body p {
+  color: #333;
+}
+
+/* Botón Cerrar */
+.modal-body .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.modal-body {
+  text-align: center;
+}

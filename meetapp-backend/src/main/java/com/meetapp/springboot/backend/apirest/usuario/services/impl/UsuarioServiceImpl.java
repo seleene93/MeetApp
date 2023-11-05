@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Base64;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.meetapp.springboot.backend.apirest.jwt.service.JwtService;
+import com.meetapp.springboot.backend.apirest.meetup.mapper.IMeetupMapper;
+import com.meetapp.springboot.backend.apirest.meetup.models.MeetupDto;
 import com.meetapp.springboot.backend.apirest.usuario.mapper.IUsuarioMapper;
 import com.meetapp.springboot.backend.apirest.usuario.models.UsuarioDto;
 import com.meetapp.springboot.backend.apirest.usuario.services.IUsuarioService;
@@ -24,33 +27,43 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
 	@Autowired
 	private IUsuarioMapper usuarioMapper;
-
+	
 	@Autowired
-	private JwtService jwtService;
+	private IMeetupMapper meetupMapper;
 
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	private JwtService jwtService;
 
 	@Value("${avatar.upload.directory}")
 	private String avatarUploadDirectory;
 
 	@Override
 	public UsuarioDto register(UsuarioDto usuario) throws IOException{
+		
+		try {
+			// Obtén el avatar en Base64 y el nombre del archivo del DTO
+			String avatarBase64 = usuario.getAvatarBase64();
+			String avatarFileName = usuario.getAvatarFileName();
+			
+			// Guarda el avatar en el directorio
+			saveAvatar(avatarBase64, avatarFileName);
 
-		// Obtén el avatar en Base64 y el nombre del archivo del DTO
-		String avatarBase64 = usuario.getAvatarBase64();
-		String avatarFileName = usuario.getAvatarFileName();
-		// Guarda el avatar en el directorio
-		saveAvatar(avatarBase64, avatarFileName);
+			usuario.setPassword(bCryptPasswordEncoder.encode(usuario.getPassword()));
+			usuarioMapper.register(usuario);
+			UsuarioDto usuarioLogueado = usuarioMapper.login(usuario);
+			usuarioLogueado.setToken(jwtService.getToken(usuario));
+			usuarioLogueado.setAvatarBase64(avatarBase64);
+			usuarioLogueado.setAvatarFileName(avatarFileName);
 
-		usuario.setPassword(bCryptPasswordEncoder.encode(usuario.getPassword()));
-		usuarioMapper.register(usuario);
-		UsuarioDto usuarioLogueado = usuarioMapper.login(usuario);
-		usuarioLogueado.setToken(jwtService.getToken(usuario));
-		usuarioLogueado.setAvatarBase64(avatarBase64);
-		usuarioLogueado.setAvatarFileName(avatarFileName);
+			return usuarioLogueado;
+		} catch (IOException e) {
+			 throw new IOException("Error al registrar el usuario.", e);
+		}
 
-		return usuarioLogueado;
+		
 	}
 
 	@Override
@@ -99,4 +112,26 @@ public class UsuarioServiceImpl implements IUsuarioService {
         }
     }
 
+	@Override
+	public UsuarioDto getUsuarioById(Long idUsuario) {
+		UsuarioDto response = usuarioMapper.getUsuarioById(idUsuario);
+		List<MeetupDto> meetupsUsuario = usuarioMapper.getMeetupsByIdUsuario(idUsuario);
+		
+		if (meetupsUsuario != null && !meetupsUsuario.isEmpty() && meetupsUsuario.get(0) != null) {
+			for (int i = 0; i < meetupsUsuario.size(); i++) {
+				Long idMeetup = meetupsUsuario.get(i).getIdMeetup();
+				Long numeroAsistentes = meetupMapper.getNumAsistentes(idMeetup);
+				meetupsUsuario.get(i).setNumeroAsistentes(numeroAsistentes);
+			}
+		}
+		
+		if (response != null) {
+			int meetups = meetupsUsuario.size();
+			Long meetupsLong = Long.valueOf(meetups);
+			response.setMeetups(meetupsUsuario);
+			response.setNumeroMeetups(meetupsLong);
+		}
+		
+		return response;
+	}
 }

@@ -1,0 +1,83 @@
+<div class="card-body p-4 p-sm-5" id="div-container-1">
+  <h5 class="card-title text-center mb-5 fs-5">Crea un nuevo meetup</h5>
+  <form (ngSubmit)="nuevoMeetup()">
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="floatingInputTitulo"
+        [(ngModel)]="meetup.titulo"
+        name="titulo"
+        required
+        autofocus
+      />
+      <label for="floatingInputTitulo">Título del meetup</label>
+    </div>
+
+    <div id="form-filtros">
+      <div class="form-floating mb-3">
+        <select class="form-select">
+          <option selected>Ciudad</option>
+          <option *ngFor="let ciudad of ciudades" [value]="ciudad.idCiudad">
+            {{ ciudad.nombre }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-floating mb-3">
+        <select class="form-select">
+          <option selected>Temática</option>
+          <option
+            *ngFor="let tematica of tematicas"
+            [value]="tematica.idTematica"
+          >
+            {{ tematica.tipo }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="floatingInputDescripcion"
+        name="descripcion"
+        [(ngModel)]="meetup.descripcion"
+      />
+      <label for="floatingInputDescripcion">Descripción</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input
+        type="datetime-local"
+        class="form-control"
+        id="floatingDate"
+        name="fecha"
+        [(ngModel)]="meetup.fecha"
+      />
+      <label for="floatingDate">Fecha y Hora</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input
+        type="file"
+        class="form-control"
+        id="floatingImg"
+        name="imgBase64"
+        accept="image/*"
+      />
+      <label for="floatingImg">Foto</label>
+    </div>
+
+    <div class="d-grid mb-2">
+      <button
+        class="btn btn-lg btn-primary btn-login fw-bold text-uppercase"
+        type="submit"
+        id="nuevoMeetup"
+      >
+        Subir
+      </button>
+    </div>
+  </form>
+</div>

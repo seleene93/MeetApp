@@ -132,17 +132,18 @@ public interface IMeetupMapper {
 	public Long getNumAsistentes(@Param("idMeetup") Long idMeetup);
 	
 	@Select("SELECT " +
-			"id_usuario " +
+			"id_usuario as idUsuario " +
 			"FROM meetapp.asistentes a " +
 			"WHERE " +
 			"a.id_meetup = #{idMeetup}")
 	public List<Long> getIdsUsuariosAsistentes(@Param("idMeetup") Long idMeetup);
 	
 	@Select("SELECT " +
-			"u.nombre " +
+			"u.nombre AS nombre, " +
+			"u.avatar_base64 AS avatarBase64 " +
 			"FROM meetapp.usuarios u " +
 			"WHERE " +
-			"id_usuario = #{idUsuario}")
+			"u.id_usuario = #{idUsuario}")
 	public UsuarioDto getUsuarioAsistentes(@Param("idUsuario") Long idUsuario);
 	
 	@Insert("INSERT INTO meetups " +

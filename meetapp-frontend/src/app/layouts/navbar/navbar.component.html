@@ -29,18 +29,35 @@
             <a class="nav-link" [routerLink]="['/meetups']">Meetups</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" (click)="ModalRegistro()">Regístrate</a>
-            <!-- <a class="nav-link">Mi perfil</a> -->
+            <a
+              class="nav-link"
+              (click)="ModalRegistro()"
+              *ngIf="!this.constantesService.tokenExists"
+              >Regístrate</a
+            >
+            <a class="nav-link" *ngIf="this.constantesService.tokenExists"
+              >Mi perfil</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" (click)="ModalLogin()">Iniciar sesión</a>
-            <!-- <a class="nav-link">Mis meetups</a> -->
+            <a
+              class="nav-link"
+              (click)="ModalLogin()"
+              *ngIf="!this.constantesService.tokenExists"
+              >Iniciar sesión</a
+            >
+            <a
+              class="nav-link"
+              (click)="ModalNuevoMeetup()"
+              *ngIf="this.constantesService.tokenExists"
+              >Crear Meetup</a
+            >
           </li>
         </ul>
       </div>
     </div>
     <div id="container-ul-logout">
-      <ul id="user-log">
+      <ul id="user-log" *ngIf="this.constantesService.tokenExists">
         <li>
           <a (click)="ModalConfirmLogout()">
             <svg
@@ -76,12 +93,14 @@
           </a>
         </li>
         <li>
-          <img
-            class="mr-3 rounded-circle"
-            src="https://assets.codepen.io/460692/internal/avatars/users/default.png?format=auto&version=1688931977&width=80&height=80"
-            alt="Generic placeholder image"
-            style="max-width: 30px"
-          />
+          <a [routerLink]="['/perfil']">
+            <img
+              class="mr-3 rounded-circle"
+              [src]="constantesService.imgUsuarioLogueado"
+              alt="Imagen de usuario"
+              style="max-width: 30px"
+            />
+          </a>
         </li>
       </ul>
     </div>

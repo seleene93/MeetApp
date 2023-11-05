@@ -24,5 +24,4 @@ public class AsistenteServiceImpl implements IAsistenteService {
 		asistenteMapper.deleteAsistente(asistente);
 		return asistente;
 	}
-
 }

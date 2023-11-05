@@ -33,4 +33,9 @@ public class UsuarioController {
 	public ResponseEntity<UsuarioDto> login(@RequestBody UsuarioDto usuario) {
 		return ResponseEntity.ok(usuarioService.login(usuario));
 	}
+	
+	@PostMapping("/public/usuarios/usuario")
+	public UsuarioDto getUsuarioById(@RequestBody UsuarioDto usuario) {
+		return usuarioService.getUsuarioById(usuario.getIdUsuario());
+	}
 }

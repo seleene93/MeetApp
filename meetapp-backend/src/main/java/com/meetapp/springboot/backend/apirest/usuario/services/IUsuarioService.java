@@ -10,4 +10,6 @@ public interface IUsuarioService {
 	public UsuarioDto register(UsuarioDto usuario) throws IOException;
 
 	public UsuarioDto login(UsuarioDto usuario);
+
+	public UsuarioDto getUsuarioById(Long idUsuario);
 }
